@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import FilterClassTable from './FilterTable.js';
-import MainContent from './MainContentTable.js';
+import FilterClassTable from './ReviewListPage/FilterTable.js';
+import MainContent from './ReviewListPage/MainContentTable.js';
 
 function App() {
   return (

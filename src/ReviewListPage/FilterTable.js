@@ -1,4 +1,3 @@
-import './App.css';
 import {Button, TextField} from '@mui/material';
 
 function SearchBox() {
