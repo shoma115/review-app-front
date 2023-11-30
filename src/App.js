@@ -1,14 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-import FilterClassTable from './ReviewListPage/FilterTable.js';
-import MainContent from './ReviewListPage/MainContentTable.js';
+import ReviewList from "./ReviewListPage/ReviewListTable";
+import Test from "./ReviewDetail/reviewDetailTable";
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <>
       <div>
-        <FilterClassTable />
-        <MainContent />
+        <Routes>
+          <Route path='/' element={ <ReviewList />}></Route>
+          <Route path='/review' element={ <Test />}></Route>
+        </Routes>
       </div>
     </>
   )

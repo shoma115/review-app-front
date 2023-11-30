@@ -81,7 +81,8 @@ function ReviewBox({title, review}) {
         <Card variant="outlined" key={ reviewDatum.id }>
           <h3>{ reviewDatum.class_name }</h3>
           <h4>{ reviewDatum.instructor }</h4>
-          <h5>評価: { reviewDatum.rating }</h5>            
+          <h5>評価: { reviewDatum.rating }</h5>
+          <a href='/review'>レビューを見る</a>
         </Card>
     )
 
