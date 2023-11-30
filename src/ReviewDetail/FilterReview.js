@@ -22,7 +22,7 @@ function FilterReview() {
   return (
     <>
       <SearchBox />
-      <FilterButton topics={テスト} />
+      <FilterButton topics={'テスト'} />
     </>
   )
 }

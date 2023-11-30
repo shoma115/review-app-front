@@ -1,9 +1,15 @@
-import {Icon} from '@mui/material';
+import {Avatar, Rating, Button} from '@mui/material';
 
-function User() {
+function User({rate}) {
   return (
     <>
-      <Icon />
+      <Avatar />user-name
+      <Rating value={ rate } readOnly/>
+      <Rating value={ rate } readOnly/>
+      <p>aaaaaaaaaaaaaaaaa</p>
+      <Button variant="outlined">役に立った</Button>     
     </>
   )
 }
+
+export default User;

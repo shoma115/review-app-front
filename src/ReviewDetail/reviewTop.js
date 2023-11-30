@@ -1,3 +1,5 @@
+import {Rating} from '@mui/material';
+
 function Title() {
   return (
     <h1>みんなの声</h1>
@@ -7,8 +9,8 @@ function Title() {
 function AverageEvaluation({rateEasy, rateSatisficaton}) {
   return (
     <>
-      <p>楽単：{ rateEasy }</p>
-      <p>充実：{ rateSatisficaton}</p>
+      <p>楽単：<Rating value={ rateEasy }></Rating></p>
+      <p>充実：<Rating value={ rateSatisficaton}></Rating></p>
     </>
   )
 }

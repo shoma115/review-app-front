@@ -1,6 +1,14 @@
+import User from './ReviewCard.js';
+import ReviewTop from './reviewTop.js';
+import FilterReview from './FilterReview.js';
+
 function Test() {
   return (
-    <h1>hello, World</h1>
+    <>
+      <ReviewTop />
+      <FilterReview />
+      <User />
+    </>
   )
 }
 
