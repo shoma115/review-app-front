@@ -7,7 +7,7 @@ function Test() {
     <>
       <ReviewTop />
       <FilterReview />
-      <User />
+      <User userName={'shoma'}/>
     </>
   )
 }
