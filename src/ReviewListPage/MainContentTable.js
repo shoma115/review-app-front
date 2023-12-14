@@ -19,10 +19,10 @@ function ReviewBox({title, review}) {
     
     useEffect(() => {
         axiosApiSetBaseURL.get("/api/lesson")
-            .then(response => {
+            .then((response) => {
                 setLessons(response.data.data.lessons);   
             })
-            .catch(error => {
+            .catch((error) => {
                 alert("授業データの取得に失敗しました。リロードしてください");
                 console.log(error);
             });
@@ -32,7 +32,7 @@ function ReviewBox({title, review}) {
 
         <Card variant="outlined" key={ lesson.id }>
           <h3>{ lesson.name }</h3>
-          {lesson.teachers.map(teacher => <h4 key={ teacher.id }>{teacher.name}先生&emsp;</h4>)}
+          {lesson.teachers.map((teacher) => <h4 key={ teacher.id }>{teacher.name}先生&emsp;</h4>)}
           <Link to={"/review"} state={{ lesson: lesson }}>授業詳細/皆の声</Link>
         </Card>
     )

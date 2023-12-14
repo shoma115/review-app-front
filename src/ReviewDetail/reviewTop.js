@@ -17,25 +17,12 @@ function AverageEvaluation({rateEase, rateSatisficaton}) {
   )
 }
 
-function ReviewTop() {
-  const location = useLocation().state.lesson;
-  console.log(location);
-  const lessonName = location.name;
-  const attendance = location.attendance;
-  const assignment = location.assignment;
-  const test = location.test;
-  const teachers = location.teachers.map(teacher =>(
-    <p key={teacher.id}>{teacher.name}</p>
-  ))
-  const rateEase = location.reviews_avg_ease;
-  const rateSatisficaton = location.reviews_avg_enrichment;
-  const createdAt = location.created_at;
-  const updatedAt = location.updated_at;
+function ReviewTop({ lesson }) {
 
   return (
     <>
       <Title />
-      <AverageEvaluation rateEase={ rateEase } rateSatisficaton={ rateSatisficaton } />
+      <AverageEvaluation rateEase={ lesson.reviews_avg_ease } rateSatisficaton={ lesson.reviews_avg_enrichment } />
     </>
   )
   }
