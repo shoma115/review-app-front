@@ -29,7 +29,6 @@ function ReviewBox({ lessons }) {
 }
 
 function MainContent({ lessons }) {
-    console.log(lessons);
     return (
         <>
           <ContentTitle start="0" end="5" />
