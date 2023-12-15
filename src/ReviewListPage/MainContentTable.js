@@ -1,6 +1,4 @@
 import Card from '@mui/material/Card';
-import axiosApiSetBaseURL from '../BaseURL';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function ContentTitle({start, end}) {
@@ -14,22 +12,9 @@ function ContentTitle({start, end}) {
     )
 }
 
-function ReviewBox({title, review}) {
-    const [lessons, setLessons] = useState([]);
+function ReviewBox({ lessons }) {
     
-    useEffect(() => {
-        axiosApiSetBaseURL.get("/api/lesson")
-            .then((response) => {
-                setLessons(response.data.data.lessons);   
-            })
-            .catch((error) => {
-                alert("授業データの取得に失敗しました。リロードしてください");
-                console.log(error);
-            });
-    }, [])
-    console.log(lessons)
     const cards = lessons.map(lesson =>
-
         <Card variant="outlined" key={ lesson.id }>
           <h3>{ lesson.name }</h3>
           {lesson.teachers.map((teacher) => <h4 key={ teacher.id }>{teacher.name}先生&emsp;</h4>)}
@@ -43,11 +28,12 @@ function ReviewBox({title, review}) {
 
 }
 
-function MainContent() {
+function MainContent({ lessons }) {
+    console.log(lessons);
     return (
         <>
           <ContentTitle start="0" end="5" />
-          <ReviewBox title="演習" review="5" />
+          <ReviewBox  lessons={ lessons } />
         </>
     );
 }
