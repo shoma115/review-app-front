@@ -1,5 +1,6 @@
 import ReviewList from "./ReviewListPage/ReviewListTable";
 import ReviewDetail from "./ReviewDetail/reviewDetailTable";
+import TopPage from "./Top/topPage";
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -7,7 +8,8 @@ function App() {
     <>
       <div>
         <Routes>
-          <Route path='/' element={ <ReviewList />}></Route>
+          <Route path='/' element={ <TopPage /> }></Route>
+          <Route path='/lesson' element={ <ReviewList />}></Route>
           <Route path='/review' element={ <ReviewDetail />}></Route>
         </Routes>
       </div>

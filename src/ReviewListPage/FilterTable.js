@@ -1,30 +1,10 @@
-import {Button, TextField} from '@mui/material';
-
-function SearchBox() {
-  return ( 
-    <>
-      <TextField size="small" placeholder="授業名で検索"></TextField>
-      <Button variant="outlined" type="submit">検索</Button>
-    </>
-  );
-}
-
-function FilterButton({value}) {
+// 授業一覧画面の検索機能をまとめてラッピングしている。構造を分かりやすくするために実装
+function FilterLessonTable({ children }) {
   return (
-    <>
-      <p>他の条件で検索：</p>
-      <Button variant="contained">{value}</Button>
-    </>
+    <div>
+      { children }
+    </div>
   );
 }
 
-function FilterClassTable() {
-  return (
-    <>
-      <SearchBox />
-      <FilterButton value="学部"/>
-    </>
-  );
-}
-
-export default FilterClassTable;
+export default FilterLessonTable;

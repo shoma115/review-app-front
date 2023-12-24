@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 function ReviewDetail() {
   const location = useLocation().state.lesson;
   const [ review, setReview ] = useState([])
+  console.log(location);
   
   useEffect(() => {
     axiosApiSetBaseURL.get(`api/${ location.id }/review`)

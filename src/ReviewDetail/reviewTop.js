@@ -1,5 +1,4 @@
 import {Rating} from '@mui/material';
-import { useLocation } from 'react-router-dom';
 
 function Title() {
   return (

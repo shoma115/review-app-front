@@ -1,8 +1,11 @@
 import Card from '@mui/material/Card';
 import { Link } from 'react-router-dom';
 
-function ContentTitle({start, end}) {
-    const displayed = start + "件～" + end + "件";
+function ContentTitle({page}) {
+    const from = page.from;
+    const to = page.to
+    const total = page.total;
+    const displayed = from + "～" + to + "件" + " / 全"  + total + "件";
     return (
         <>
           <h1>授業一覧</h1>
@@ -28,10 +31,10 @@ function ReviewBox({ lessons }) {
 
 }
 
-function MainContent({ lessons }) {
+function MainContent({ lessons, page }) {
     return (
         <>
-          <ContentTitle start="0" end="5" />
+          <ContentTitle page={ page } />
           <ReviewBox  lessons={ lessons } />
         </>
     );
