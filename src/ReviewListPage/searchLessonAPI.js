@@ -8,7 +8,12 @@ function searchLessonAPI(currentPage, facultyId, department, major, division, se
     search: search,
   }
 
-  axiosApiSetBaseURL(`api/lesson/search?currentPage=${currentPage}&faculty=${facultyId}`)
+  const fliteredSearchParams = Object.fromEntries(
+    Object.entries(searchParams).filter(([key, value]) => value !== null)
+  );
+  const queryParams = new URLSearchParams(fliteredSearchParams).toString();
+
+  axiosApiSetBaseURL(`api/lesson/search?currentPage=${currentPage}&faculty=${facultyId}&${queryParams}`)
     .then((response) => {
       setLessons(response.data.data.lessons);
       setPage(response.data.meta);
@@ -18,3 +23,5 @@ function searchLessonAPI(currentPage, facultyId, department, major, division, se
       alert("データの取得に失敗しました。再読み込みしてください。")
     })
 }
+
+export default searchLessonAPI;
