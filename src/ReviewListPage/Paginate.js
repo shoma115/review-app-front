@@ -5,7 +5,6 @@ function Paginate({ page, setCurrentPage}) {
     setCurrentPage(value);
   }
 
-  console.log(page)
   return (
     <Pagination count={ page.last_page } page={ page.current_page } variant="outlined" shape="rounded" onChange={handleClick}/>
   )

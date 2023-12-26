@@ -6,6 +6,7 @@ import MainContent from './MainContentTable.js';
 import Paginate from './Paginate.js';
 import { useEffect, useState } from 'react';
 import getLessonAPI from './getLessonAPI.js';
+import searchLessonAPI from './searchLessonAPI.js';
 import { useLocation } from 'react-router-dom';
 import { Icon } from '@mui/material';
 
@@ -18,7 +19,7 @@ function ReviewList() {
   // 以下、FilterModalに受け渡すもの
   const [departments, setDepartments] = useState([]);
   const [departmentValues, setDepartmentValues] = useState(null);
-  const handleToggle = (event, newDepartmentValues) => {
+  const handleDepartment = (event, newDepartmentValues) => {
     setDepartmentValues(newDepartmentValues);
     setMajorValues(null);
     setDivisionValues(null);
@@ -37,7 +38,27 @@ function ReviewList() {
   const handleOpne  = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-    
+  const [inputValue, setInputValue] = useState(null);
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value); 
+  }
+
+  const handleSearch = () => {
+
+    searchLessonAPI(
+      currentPage, 
+      facultyId, 
+      departmentValues, 
+      majorValues, 
+      divisionValues, 
+      inputValue, 
+      setLessons, 
+      setPage
+    )
+    setOnSearch(true);
+    handleClose();
+  }
+  
   useEffect(() => {
 
     getLessonAPI(currentPage, facultyId, setLessons, setPage);
@@ -51,11 +72,12 @@ function ReviewList() {
       <div>
         {/* childrenプロップで、子コンポーネントを渡している */}
         <FilterLessonTable>
-          <SearchBox />
-          <FilterButton 
-            facultyId={facultyId}
-            setDepartments={setDepartments}
-          >
+          <SearchBox 
+            inputValue={inputValue}
+            handleInputvalue={handleInputChange}
+            handleSearch={handleSearch}  
+          />
+          <FilterButton facultyId={facultyId} setDepartments={setDepartments}>
             <p>
               学科以下で絞り込み
               <Icon color="primary" onClick={ handleOpne }>add_circle</Icon>
@@ -65,11 +87,12 @@ function ReviewList() {
               open={opne} 
               handleClose={handleClose} 
               departmentValues={departmentValues} 
-              handleDepartment={handleToggle}
+              handleDepartment={handleDepartment}
               majorValues={majorValues} 
               handleMajor={handleMajor} 
               divisionValues={divisionValues} 
               handleDivision={handleDivision}
+              handleSearch={handleSearch}
             />
           </FilterButton>
         </FilterLessonTable>

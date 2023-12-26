@@ -2,10 +2,10 @@ import axiosApiSetBaseURL from '../BaseURL';
 
 function searchLessonAPI(currentPage, facultyId, department, major, division, search, setLessons, setPage) {
   const searchParams = {
-    department: department,
-    major: major,
-    division: division,
-    search: search,
+    department: department ? department.id : null,
+    major: major ? major.id : null,
+    division: division ? division.id : null,
+    search: search ? search : null,
   }
 
   const fliteredSearchParams = Object.fromEntries(
@@ -17,6 +17,7 @@ function searchLessonAPI(currentPage, facultyId, department, major, division, se
     .then((response) => {
       setLessons(response.data.data.lessons);
       setPage(response.data.meta);
+      console.log("起動!")
     })
     .catch((error) => {
       console.log(error)

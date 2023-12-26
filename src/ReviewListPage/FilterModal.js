@@ -7,7 +7,18 @@ import {
   DialogTitle 
 } from "@mui/material";
 
-function FilterModal({departments, open, handleClose, departmentValues, handleDepartment, majorValues, handleMajor, divisionValues, handleDivision}) {
+function FilterModal({
+  departments, 
+  open, 
+  handleClose, 
+  departmentValues, 
+  handleDepartment, 
+  majorValues, 
+  handleMajor, 
+  divisionValues, 
+  handleDivision,
+  handleSearch,
+}) {
   
   const selectDepartmentButton = departments.map(department =>
     <ToggleButton value={department} aria-label={department.name}>
@@ -90,7 +101,7 @@ function FilterModal({departments, open, handleClose, departmentValues, handleDe
             <Button onClick={handleClose}>
               閉じる
             </Button>
-            <Button onClick={handleClose}>
+            <Button onClick={handleSearch}>
               検索
             </Button>
           </DialogActions>
