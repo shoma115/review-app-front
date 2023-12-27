@@ -61,7 +61,26 @@ function ReviewList() {
   
   useEffect(() => {
 
-    getLessonAPI(currentPage, facultyId, setLessons, setPage);
+    // 検索がかかっていたら、検索APIを実行。そうでなければ通常のAPIを実行
+    onSearch ? 
+      searchLessonAPI
+      (
+        currentPage, 
+        facultyId, 
+        departmentValues, 
+        majorValues, 
+        divisionValues, 
+        inputValue, 
+        setLessons, 
+        setPage
+      ) :
+      getLessonAPI
+      (
+        currentPage, 
+        facultyId, 
+        setLessons, 
+        setPage
+      );
   // setCurrentPageをpropとして子のpaginateに渡しており、ページを変更するごとにcurrentPageが再設定される。
   // つまり、依存配列にcurrentPageを設定することで、ページを移動するごとにAPIが起動する。マウント時もちゃんと起動するので安心してね
   }, [currentPage])
