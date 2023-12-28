@@ -1,7 +1,7 @@
 import {Avatar, Rating, Button} from '@mui/material';
 import '../App.css';
 
-function User({ reviews }) {
+function Review({ reviews }) {
   console.log(reviews)
   const reviewCard = reviews.map((review) =>
     <>
@@ -24,4 +24,4 @@ function User({ reviews }) {
   )
 }
 
-export default User;
+export default Review;
