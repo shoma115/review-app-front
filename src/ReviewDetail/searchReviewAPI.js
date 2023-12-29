@@ -1,6 +1,6 @@
 import axiosApiSetBaseURL from '../BaseURL.js';
 
-function searchReviewAPI(lesson, searchWord, setReview) {
+function searchReviewAPI(searchWord, lesson, setReview) {
   const searchParams = {
     search: searchWord ? searchWord : null, 
   }
@@ -10,7 +10,7 @@ function searchReviewAPI(lesson, searchWord, setReview) {
   );
   const queryParams = new URLSearchParams(fliteredSearchParams).toString();
 
-  axiosApiSetBaseURL(`api/review/search?lesson=${ lesson }&${ queryParams }`)
+  axiosApiSetBaseURL.get(`api/review/search?lesson=${ lesson }&${ queryParams }`)
     .then(response => {
       setReview(response.data.data.reviews);
     })

@@ -1,12 +1,12 @@
 import { TextField, Button } from "@mui/material";
 
-function SearchBox({inputValue, handleInputvalue, handleSearch}) {
+function SearchBox({inputValue,placeholder, handleInputvalue, handleSearch}) {
   return ( 
     <>
       <TextField
         value={inputValue} 
         size="small" 
-        placeholder="授業名で検索"
+        placeholder={placeholder}
         onChange={handleInputvalue}
       >
       </TextField>

@@ -1,6 +1,6 @@
 import FilterLessonTable from './FilterTable.js';
 import FilterButton from './FilterButton.js';
-import SearchBox from './SearchBox.js';
+import SearchBox from '../commonComponents/SearchBox.js';
 import FilterModal from './FilterModal';
 import MainContent from './MainContentTable.js';
 import Paginate from './Paginate.js';
@@ -93,6 +93,7 @@ function ReviewList() {
         <FilterLessonTable>
           <SearchBox 
             inputValue={inputValue}
+            placeholder="授業名で検索"
             handleInputvalue={handleInputChange}
             handleSearch={handleSearch}  
           />
