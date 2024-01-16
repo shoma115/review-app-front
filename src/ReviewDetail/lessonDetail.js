@@ -4,12 +4,11 @@ function LessonDetail({ lesson }) {
   const teachers = lesson.teachers.map((teacher) => 
     <spna key={ teacher.id }>{ teacher.name }先生&emsp;</spna>
   );
-  console.log(lesson);
+
   const division = lesson.division;
   const major = division.major;
   const department = major.department;
   const faculty = department.faculty;
-  console.log(division);
 
   return (
     <>

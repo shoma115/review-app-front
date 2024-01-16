@@ -1,6 +1,10 @@
 import { Button } from "@mui/material";
 
-function FilterButton({topics}) {
+function FrequentWords({topics}) {
+  window.onload = () => {
+    
+  }
+
   return (
     <>
       <p>よく出るトピック：</p>
@@ -9,4 +13,4 @@ function FilterButton({topics}) {
   );
 }
 
-export default FilterButton;
+export default FrequentWords;

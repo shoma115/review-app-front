@@ -1,7 +1,7 @@
 import Review from './ReviewCard.js';
 import ReviewTop from './reviewTop.js';
 import FilterReview from './FilterReview.js';
-import FilterButton from './FilterButton.js';
+import FrequentWords from './FrequentWords.js';
 import SearchBox from '../commonComponents/SearchBox.js';
 import LessonDetail from './lessonDetail.js';
 import { useLocation } from 'react-router-dom';
@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 function ReviewDetail() {
   const location = useLocation().state.lesson;
   const [ review, setReview ] = useState([])
-  console.log(location);
+  console.log(window);
 
   const [inputValue, setInputValue] = useState(null);
   const handleInputChange = (event) => {
@@ -38,7 +38,7 @@ function ReviewDetail() {
           handleInputvalue={handleInputChange}
           handleSearch={handleSearch} 
         />
-        <FilterButton 
+        <FrequentWords 
           topics="テスト"
         />
       </FilterReview>
