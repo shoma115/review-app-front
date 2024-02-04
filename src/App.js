@@ -7,6 +7,8 @@ import { Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from "./commonComponents/AuthProvider";
+import { AuthGuard } from "./commonComponents/AuthGuard";
 
 const queryClient = new QueryClient()
 
@@ -15,17 +17,19 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <div>
-        <ToastContainer />
-          <Routes>
-            <Route path='/' element={ <TopPage /> }></Route>
-            <Route path='/register' element={ <RegisterPage /> }></Route>
-            <Route path="/login" element={ <LoginPage /> }></Route>
-            <Route path='/lesson' element={ <ReviewList />}></Route>
-            <Route path='/review' element={ <ReviewDetail />}></Route>
-          </Routes>
-        <ToastContainer />
-        </div>
+        <AuthProvider>
+          <div>
+            <ToastContainer />
+              <Routes>
+                <Route path='/' element={ <AuthGuard component={<TopPage />} redirect='/login' /> }></Route>
+                <Route path='/register' element={ <RegisterPage /> }></Route>
+                <Route path='/login' element={ <LoginPage /> }></Route>
+                <Route path='/lesson' element={ <AuthGuard component={<ReviewList />} redirect='/login' /> }></Route>
+                <Route path='/review' element={ <AuthGuard component={<ReviewDetail />} redirect='/login' /> }></Route>
+              </Routes>
+            <ToastContainer />
+          </div>
+        </AuthProvider>
       </QueryClientProvider>
     </>
   )
