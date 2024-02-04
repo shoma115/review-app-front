@@ -13,7 +13,6 @@ import { useRegister } from '../Querys/AuthQuery';
 import { toastError } from '../commonComponents/Toast';
 
 const RegisterPage = () => {
-  const register = useRegister(null);
   const [ name, setName ] = useState(null);
   const [ email, setEmail ] = useState(null);
   const [ password, setPassword ] = useState(null);
@@ -21,6 +20,7 @@ const RegisterPage = () => {
   const [ showPassword, setShowPassword ] = useState(false);
   const [ showPasswordConfirmation, setShowPasswordConfirmation ] = useState(false);
   const [ passwordError, setPaswordError ] = useState(false);
+  const register = useRegister(email, password);
 
   // パスワード欄のvisiblityを変更する関数
   const handleClickShowPassword = (setUseState) => setUseState((show) => !show);
@@ -34,15 +34,14 @@ const RegisterPage = () => {
      event.preventDefault();
 
     // パスワードとパスワード（確認）の照合
-    if(password !== showPasswordConfirmation) {
+    if(password !== passwordConfirmation) {
       toastError("パスワードが一致しません。")
       setPaswordError(true);
       return;
     }
     // 登録のAPIへパラメータを送る
     register.mutate({ name: name, email: email, password: password});
-    console.log(email)
-    console.log(password)
+        
   }
 
   return (

@@ -1,61 +1,67 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import * as authApi from '../APIs/AuthAPI';
-import { toast } from 'react-toastify';
-import { toastSucsess, toastError } from '../commonComponents/Toast';
-// APIがaxiosエラーを投げてくる可能性があるため追加
-import axios from 'axios';
+import { toastSucsess } from '../commonComponents/Toast';
+import { useMutationWithToast } from '../Functions/useMutationWithToast';
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from '../commonComponents/AuthProvider';
 
 export const useUser = () => {
   const { user } = useQuery(['users'], authApi.getUsers);
   return user;
 }
 
-const useMutationWithToast = (mutationFn, successMessage, errorMessage) => {
+export const useRegister = (email, password) => {
+  const login = useLogin();
   const queryClient = useQueryClient();
+  const onSuccess = () => {
+    // usersキーのクエリを無効化。データの再フィッチを行い、キャッシュのデータを最新に保つ。
+    queryClient.invalidateQueries(['users']);
+    toastSucsess('登録に成功しました。');
+    login.mutate({email: email, password: password})
+  } 
 
-  return useMutation
-  ({
-    mutationFn: mutationFn, 
-    onSuccess: () => {
-      // usersキーのクエリを無効化。データの再フィッチを行い、キャッシュのデータを最新に保つ。
-      queryClient.invalidateQueries(['users']);
-      toastSucsess(successMessage);
-    },
-    onError: (error) => {
-      const { data } = error.response ? error.response.data : null;
-      if(data && data.errors) {
-        Object.values(data.errors).forEach((messages) => {
-          messages.forEach((message) => {
-            toastError(message);
-          });
-        });
-      } else {
-        toastError(errorMessage);
-      }
-    },
-  });
-}
-
-export const useRegister = () => {
   return useMutationWithToast(
     authApi.register,
-    '登録が完了しました',
+    onSuccess,
     '登録に失敗しました',
   )
 };
 
 export const useLogin = () => {
+  const { stateChangeToLogin } = useAuthContext();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const onSuccess = () => {
+    // usersキーのクエリを無効化。データの再フィッチを行い、キャッシュのデータを最新に保つ。
+    queryClient.invalidateQueries(['users']);
+    toastSucsess('ログインに成功しました');
+    // ユーザーのログイン状態のstateをtrueに
+    stateChangeToLogin();
+    // ホーム画面にリダイレクト
+    navigate('/');
+  } 
+
   return useMutationWithToast(
     authApi.login, 
-    'ログインに成功しました', 
+    onSuccess, 
     'ログインに失敗しました',
     )
 };
 
 export const useLogout = () => {
+  const { stateChangeToLogout } = useAuthContext();
+  const queryClient = useQueryClient();
+  const onSuccess = () => {
+    // usersキーのクエリを無効化。データの再フィッチを行い、キャッシュのデータを最新に保つ。
+    queryClient.invalidateQueries(['users']);
+    toastSucsess('ログアウトしました。');
+    // ログインstateをfalseに
+    stateChangeToLogout();
+  } 
+
   return useMutationWithToast(
     authApi.logout,
-    'ログアウトしました',
+    onSuccess,
     'ログアウトに失敗しました。',
   )
 };

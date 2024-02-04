@@ -9,6 +9,10 @@ export const getUsers = async() => {
 // ユーザー登録を行う際の非同期関数
 export const register = async({name, email, password}) => {
   try {
+    // csrfトークンの取得
+    await axiosApiSetBaseURL.get('sanctum/csrf-cookie')
+    
+    // ユーザー登録処理
     const { data } = await axiosApiSetBaseURL.post('api/register', {
       name,
       email,
@@ -24,6 +28,8 @@ export const register = async({name, email, password}) => {
 
 // ログインを行う非同期関数。ユーザー入力のemailとPWを引数にとる。
 export const login = async({email, password}) => {
+  // csrfトークンの取得
+  await axiosApiSetBaseURL.get('sanctum/csrf-cookie')
   try {
     const { data } = await axiosApiSetBaseURL.post('api/login', {email, password});
     return data;
