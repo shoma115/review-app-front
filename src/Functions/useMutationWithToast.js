@@ -1,5 +1,6 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import { toastError } from '../commonComponents/Toast';
 
 // mutationFn、successFnにはメソッドを投げる。
 export const useMutationWithToast = (mutationFn, successFn, errorMessage) => {
@@ -13,7 +14,7 @@ export const useMutationWithToast = (mutationFn, successFn, errorMessage) => {
       if(data && data.errors) {
         Object.values(data.errors).forEach((messages) => {
           messages.forEach((message) => {
-            toast.error(message);
+            toastError(message);
           });
         });
       } else {
