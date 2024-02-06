@@ -5,15 +5,17 @@ import FrequentWords from './FrequentWords.js';
 import SearchBox from '../commonComponents/SearchBox.js';
 import LessonDetail from './lessonDetail.js';
 import { useLocation } from 'react-router-dom';
-import getReviewsAPI from './getReviewsAPI.js';
 import searchReviewAPI from './searchReviewAPI.js';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import Icon from '@mui/material/Icon';
+import { useGetReview } from '../Querys/ReviewQuery.js';
 
 function ReviewDetail() {
   const location = useLocation().state.lesson;
-  const [ review, setReview ] = useState([])
-  console.log(window);
-
+  // ↓この子がundefined投げてます。修正対象
+  const { data, isLoading, isError } = useGetReview(location.id);
+  console.log(data);
+  const [ review, setReview ] = useState()
   const [inputValue, setInputValue] = useState(null);
   const handleInputChange = (event) => {
     setInputValue(event.target.value); 
@@ -22,10 +24,13 @@ function ReviewDetail() {
   const handleSearch = () => {
     searchReviewAPI(inputValue, location.id, setReview);
   }
-  
-  useEffect(() => {
-    getReviewsAPI(location.id, setReview);
-  }, [])
+
+  if(isLoading) {
+    return <h1>Loading...</h1>
+  }
+  else if(isError) {
+    return <h1>Error</h1>
+  }
   
   return (
     <>
@@ -42,7 +47,8 @@ function ReviewDetail() {
           topics="テスト"
         />
       </FilterReview>
-      <Review reviews={ review } />
+      <Icon sx={{ fontSize: 30 }}>add_circle</Icon>
+      <Review reviews={ data.reviews } />
     </>
   )
 }
