@@ -1,16 +1,16 @@
 import axiosApiSetBaseURL from '../BaseURL';
 
-export const getAPI = async(lessonId) => {
+export const getAPI = async(lesson) => {
  try {
-  await axiosApiSetBaseURL.get(`api/review?lesson=${ lesson }`)
+  const response = await axiosApiSetBaseURL.get(`api/review?lesson=${ lesson }`)
+  const data = response.data.data
+  return data
  }
  catch(error) {
   console.log(error);
   throw(error)
  }
 }
-
-export default getReviewsAPI;
 
 export const postAPI = async(title, ease, enrichment, content, userId, lessonId,) => {
   try {
