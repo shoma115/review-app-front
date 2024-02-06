@@ -3,9 +3,9 @@ import { toastSucsess } from "../commonComponents/Toast";
 import { useMutationWithToast } from "../Functions/useMutationWithToast";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useGetReview = () => {
-  const { reviews } = useQuery(['reviews'], revivewAPI.getAPI);
-  return reviews
+export const useGetReview = (lessonId) => {
+  const { data, error, isLoading, isError} = useQuery({queryKey: ['reviews', lessonId], queryFn: () => revivewAPI.getAPI(lessonId)});
+  return {data, isLoading, isError}
 }
 
 export const usePostReview = () => {
