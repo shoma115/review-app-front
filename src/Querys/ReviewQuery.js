@@ -3,12 +3,20 @@ import { toastSucsess } from "../commonComponents/Toast";
 import { useMutationWithToast } from "../Functions/useMutationWithToast";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useGetReview = (lessonId) => {
+// レビュー取得APIへのクエリ
+export const useGet = (lessonId) => {
   const { data, error, isLoading, isError} = useQuery({queryKey: ['reviews', lessonId], queryFn: () => revivewAPI.getAPI(lessonId)});
-  return {data, isLoading, isError}
+  return {data, isLoading, isError};
 }
 
-export const usePostReview = () => {
+// レビュー検索APIへのクエリ
+export const useSearch = (searchWord, lessonId) => {
+  const { data, error, isLoading, isError } = useQuery({queryKey: ['reviews', searchWord, lessonId], queryFn: () => revivewAPI.searchAPI(searchWord, lessonId)});
+  return {data, isLoading, isError};
+}
+
+// レビュー投稿APIへのクエリ
+export const usePost = () => {
   const queryClient = useQueryClient();
   const onSuccess = () => {
     queryClient.invalidateQueries(['reviews'])
