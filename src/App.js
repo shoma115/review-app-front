@@ -10,7 +10,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from "./commonComponents/AuthProvider";
 import { AuthGuard } from "./commonComponents/AuthGuard";
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    refetchOnWindowFocus: false,
+  }
+})
 
 function App() {
 
