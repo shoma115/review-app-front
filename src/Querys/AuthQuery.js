@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from '../commonComponents/AuthProvider';
 
 export const useUser = () => {
-  const { user } = useQuery(['users'], authApi.getUsers);
-  return user;
+  const { data, error, isLoading, isError } = useQuery({queryKey: ['users'], queryFn: authApi.getUsers});
+  return {data, isLoading, isError};
 }
 
 export const useRegister = (email, password) => {
