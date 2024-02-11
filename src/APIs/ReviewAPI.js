@@ -35,16 +35,31 @@ export const searchAPI = async(searchWord, lesson) => {
 }
 
 // 授業レビューの投稿
-export const postAPI = async(title, ease, enrichment, content, userId, lessonId,) => {
+export const postAPI = async(params) => {
   try {
-    await axiosApiSetBaseURL.post("/api/review", {
-      title: title,
-      ease: ease,
-      enrichment: enrichment,
-      content: content,
-      userId: userId,
-      lessonId: lessonId,
-    })
+    await axiosApiSetBaseURL.post("/api/review", params)
+  }
+  catch(error) {
+    console.log(error);
+    throw(error)
+  }
+  
+}
+
+export const updateAPI = async({reviewId, params}) => {
+  try {
+    await axiosApiSetBaseURL.patch(`/api/review/${reviewId}`, params)
+  }
+  catch(error) {
+    console.log(error);
+    throw(error)
+  }
+  
+}
+
+export const deleteAPI = async({ reviewId } ) => {
+  try {
+    await axiosApiSetBaseURL.delete(`/api/review/${reviewId}`)
   }
   catch(error) {
     console.log(error);
