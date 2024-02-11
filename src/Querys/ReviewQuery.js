@@ -23,9 +23,39 @@ export const usePost = () => {
     toastSucsess("投稿が完了しました。");
   }
 
-  useMutationWithToast(
+  return useMutationWithToast(
     revivewAPI.postAPI,
     onSuccess,
     "投稿に失敗しました。"
+  )
+}
+
+// レビューの更新
+export const useUpdate = () => {
+  const queryClient = useQueryClient();
+  const onSuccess = () => {
+    queryClient.invalidateQueries(['reviews'])
+    toastSucsess("更新しました。");
+  }
+
+  return useMutationWithToast(
+    revivewAPI.updateAPI,
+    onSuccess,
+    "更新に失敗しました"
+  )
+}
+
+// レビューの削除
+export const useDelete = () => {
+  const queryClient = useQueryClient();
+  const onSuccess = () => {
+    queryClient.invalidateQueries(['reviews'])
+    toastSucsess("削除しました。");
+  }
+
+  return useMutationWithToast(
+    revivewAPI.deleteAPI,
+    onSuccess,
+    "削除できませんでした。"
   )
 }
