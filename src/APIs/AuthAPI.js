@@ -2,8 +2,8 @@ import axiosApiSetBaseURL from '../BaseURL';
 
 // ユーザー情報を取得する非同期関数
 export const getUsers = async() => {  
-  const { user } = await axiosApiSetBaseURL.get('api/user');
-  return user;
+  const data = await axiosApiSetBaseURL.get('api/user');
+  return data;
 }
 
 // ユーザー登録を行う際の非同期関数
